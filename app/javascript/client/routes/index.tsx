@@ -2,9 +2,11 @@ import React from "react";
 import type { RootState } from '../store';
 import { useSelector } from "react-redux";
 import { createBrowserRouter, Navigate } from "react-router-dom";
+import Root from "./Root";
+
 import Home from "../pages/Home";
 import Dashboard from "../pages/Dashboard";
-import Root from "./Root";
+import EdittingBook from "../pages/EdittingBook";
 // const history = createBrowserHistory({ window })
 
 type RouteProps = {
@@ -35,7 +37,10 @@ const router = createBrowserRouter([
         path: "",
         element: <PublicRoute element={<Home />}/>,
       },
-
+      {
+        path: "edit_book",
+        element: <PublicRoute element={<EdittingBook />} />,
+      },
       {
         path: "dashboard",
         element: <PrivateRoute element={<Dashboard />} />,
