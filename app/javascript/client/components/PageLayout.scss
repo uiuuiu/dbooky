@@ -1,3 +1,5 @@
 .left-board {
   display: flex;
+  flex-direction: column !important;
+  padding: 5px;
 }

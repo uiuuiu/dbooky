@@ -2,6 +2,9 @@ import React from "react";
 import {Link} from "react-router-dom";
 import { Container, Grid } from "@mui/material";
 import "./PageLayout.scss";
+import { useSelector } from "react-redux";
+import {RootState} from '../store';
+import SideBarNavigation from "./SideBarNavigation";
 
 
 type PageLayoutProps = {
@@ -19,18 +22,13 @@ const CustomGrid: React.FC<CustomGridProps> = ({children, ...props}) => {
 };
 
 const PageLayout: React.FC<PageLayoutProps> = ({ children }: PageLayoutProps) => {
-
   return (
     <Grid container spacing={2} style={{height: "100vh"}}>
       <CustomGrid sm={3} className="left-board">
-        <div className="header-links">
-          <div className="item">Github</div>
-          <div className="item">Upwork</div>
-          <div className="item">Linked</div>
-          <div className="item"><Link to="/">Home</Link></div>
-        </div>
+        <SideBarNavigation />
       </CustomGrid>
       <CustomGrid sm={9}>
+        {children}
       </CustomGrid>
     </Grid>
   )

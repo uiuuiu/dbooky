@@ -4,4 +4,10 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "articles#index"
+  get "dashboard", to: 'components#index'
+  get "edit_book", to: 'components#index'
+
+  namespace :api do
+    resources :books
+  end
 end
