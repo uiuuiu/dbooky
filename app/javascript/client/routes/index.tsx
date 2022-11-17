@@ -1,13 +1,12 @@
 import React from "react";
-import type { RootState } from '../store';
-import { useSelector } from "react-redux";
 import { createBrowserRouter, Navigate } from "react-router-dom";
 import Root from "./Root";
 
 import Home from "../pages/Home";
 import Dashboard from "../pages/Dashboard";
 import EdittingBook from "../pages/EdittingBook";
-// const history = createBrowserHistory({ window })
+
+import AppContext from './AppContext';
 
 type RouteProps = {
   element: React.ReactElement
@@ -15,8 +14,8 @@ type RouteProps = {
 }
 
 const PrivateRoute = ({ element, publicElement }: RouteProps) => {
-  const { token } = useSelector((state: RootState) => state.auth)
-  if (token) {
+  const {loggedIn} = React.useContext(AppContext);
+  if (loggedIn) {
     return element;
   }
   return publicElement ? publicElement : <Navigate to="/" />;

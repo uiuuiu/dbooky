@@ -1,20 +1,27 @@
-import React, { useState } from "react";
+import React from "react";
 import { TabContext, TabList, TabPanel } from '@mui/lab';
 import { Box, Tab } from "@mui/material";
 
 import EdittingBook from "./EdittingBook";
 import Chapters from "./Chapters";
+import Account from "./Account";
+import Books from './Books';
+
+import {bookActions} from "./actions";
+import appActions from "../../actions/appActions";
 
 import './index.scss';
+import { useSelector } from "react-redux";
+import { RootState } from "../../store";
 
 const SideBarNavigation: React.FC = () => {  
-  const [tab, setTab] = useState('1');
+  const { selectedTab } = useSelector((state: RootState) => state.app)
 
   return (
     <>
-      <TabContext value={tab}>
+      <TabContext value={selectedTab}>
         <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-          <TabList onChange={(e, value) => setTab(value || '1')} aria-label="lab API tabs example">
+          <TabList onChange={(_e, value) => appActions.changeSidebarTab(value)} aria-label="lab API tabs example">
             <Tab label="Editting" value="1" />
             <Tab label="Chapters" value="2" />
             <Tab label="Books" value="3" />
@@ -25,8 +32,8 @@ const SideBarNavigation: React.FC = () => {
           <EdittingBook />
         </TabPanel>
         <TabPanel className="tab-content" value="2"><Chapters /></TabPanel>
-        <TabPanel className="tab-content" value="3">Item Three</TabPanel>
-        <TabPanel className="tab-content" value="4">Item Four</TabPanel>
+        <TabPanel className="tab-content" value="3"><Books /></TabPanel>
+        <TabPanel className="tab-content" value="4"><Account /></TabPanel>
       </TabContext>
     </>
   )

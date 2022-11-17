@@ -1,12 +1,14 @@
 import { ApiType } from "./api";
 
-export const actions = {
-  AUTH_LOGIN: 'auth/login',
-  AUTH_LOGOUT: 'auth/logout'
-}
-
 const authApi = (api: ApiType) => {
-  return {}
+  return ({
+    login: (data) => {
+      return api.post('/users/sign_in', data);
+    },
+    logout: () => {
+      return api.get('/users/sign_out');
+    },
+  })
 }
 
 export default authApi;
