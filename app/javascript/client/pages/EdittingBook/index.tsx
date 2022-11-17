@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import MDEditor from "@uiw/react-md-editor";
 import actions from "./actions";
-import { useAppDispatch } from "../../hooks";
 
 import { useAutosave } from 'react-autosave';
 
@@ -9,7 +8,6 @@ import './index.scss';
 
 const EdittingBook: React.FC = () => {
   const [content, setContent] = useState<string>(localStorage.getItem("edittingBookData") || "**Hello world!!!**");
-  actions.setDispatch(useAppDispatch());
   useEffect(() => {
     actions.saveBookData(content);
   }, [content])

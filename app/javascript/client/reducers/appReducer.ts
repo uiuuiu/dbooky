@@ -2,30 +2,20 @@ import { AnyAction } from 'redux';
 import actions from '../actions';
 
 const initialState = {
-  edittingBookData: localStorage.getItem('edittingBookData'),
-  books: []
+  selectedTab: localStorage.getItem('selectedTab') || "1"
 }
 
 // Use the initialState as a default value
-export default function authReducer(state = initialState, action: AnyAction) {
+export default function appReducer(state = initialState, action: AnyAction) {
   // The reducer normally looks at the action type field to decide what happens
   switch (action.type) {
     // Do something here based on the different types of actions
 
-    case actions.BOOK_SAVE_DATA:
-      localStorage.setItem('edittingBookData', action.data);
+    case actions.APP_CHANGE_SIDEBAR_TAB:
+      localStorage.setItem('selectedTab', action.data);
       return {
         ...state,
-        edittingBookData: action.data,
-      }
-    case actions.BOOK_AUTO_SAVE_DATA:
-      return {
-        ...state
-      }
-    case actions.BOOK_LIST:
-      return {
-        ...state,
-        books: action.data.data
+        selectedTab: action.data,
       }
     default:
       // If this reducer doesn't recognize the action type, or doesn't

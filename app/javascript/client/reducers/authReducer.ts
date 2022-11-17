@@ -1,9 +1,11 @@
 import { AnyAction } from 'redux';
-import { actions } from '../apis/authApi';
+import actions from '../actions';
 
 const initialState = {
-  token: localStorage.getItem('token'),
-  loginSuccess: false
+  // token: localStorage.getItem('token'),
+  loginSuccess: false,
+  loginError: null,
+  loggedIn: localStorage.getItem('loggedIn') === 'true'
 }
 
 // Use the initialState as a default value
@@ -13,18 +15,25 @@ export default function authReducer(state = initialState, action: AnyAction) {
     // Do something here based on the different types of actions
 
     case actions.AUTH_LOGIN:
-      localStorage.setItem('token', action.data.token);
+      localStorage.setItem('loggedIn', 'true');
       return {
         ...state,
-        token: action.data.token,
-        loginSuccess: true
+        loginSuccess: true,
+        loggedIn: true
+      }
+    case actions.AUTH_LOGIN_ERROR:
+      // localStorage.setItem('token', action.data.token);
+      return {
+        ...state,
+        // token: action.data.token,
+        loginError: action.data.error
       }
     case actions.AUTH_LOGOUT:
-      localStorage.removeItem('token');
+      localStorage.removeItem('loggedIn');
       return {
         ...state,
         loginSuccess: false,
-        token: null
+        loggedIn: false
       }
     default:
       // If this reducer doesn't recognize the action type, or doesn't

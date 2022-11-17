@@ -11,32 +11,39 @@ export type ApiType = {
   post: Function
 }
 
+export type ApiResponseType = {
+  status: number; data: { err: any; };
+}
+
 const Api = () => {
+  const config = {
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    }
+  }
+
   return (
     {
-      get: (endPoint, query, cb) => {
-        axios({
-          url: endPoint,
-          method: 'get',
-          data: query
-        })
-        .then(res => {
-          console.log(res)
-          if(cb) cb()
-        })
-        .catch(error => console.log(error));
+      get: (endPoint: string, query: any) => {
+        return(
+          axios({
+            url: endPoint,
+            method: 'get',
+            data: query,
+            ...config
+          })
+        )
       },
-      post: (endPoint, body, cb) => {
-        axios({
-          url: endPoint,
-          method: 'post',
-          data: body
-        })
-        .then(res => {
-          console.log(res)
-          if(cb) cb()
-        })
-        .catch(error => console.log(error));
+      post: (endPoint: string, body: any) => {
+        return(
+          axios({
+            url: endPoint,
+            method: 'post',
+            data: body,
+            ...config
+          })
+        )
       },
     }
   )
