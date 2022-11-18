@@ -2,7 +2,9 @@ import { AnyAction } from 'redux';
 import actions from '../actions';
 
 const initialState = {
-  selectedTab: localStorage.getItem('selectedTab') || "1"
+  selectedTab: localStorage.getItem('selectedTab') || "1",
+  selectedBook: localStorage.getItem('selectedBook'),
+  selectedBookType: localStorage.getItem('selectedBookType'),
 }
 
 // Use the initialState as a default value
@@ -16,6 +18,14 @@ export default function appReducer(state = initialState, action: AnyAction) {
       return {
         ...state,
         selectedTab: action.data,
+      }
+    case actions.BOOK_SELECT:
+      localStorage.setItem('selectedBook', action.data.id);
+      localStorage.setItem('selectedBookType', action.data.type)
+      return {
+        ...state,
+        selectedBook: action.data.id,
+        selectedBookType: action.data.type
       }
     default:
       // If this reducer doesn't recognize the action type, or doesn't

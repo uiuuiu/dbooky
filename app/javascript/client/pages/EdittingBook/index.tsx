@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import MDEditor from "@uiw/react-md-editor";
 import actions from "./actions";
 
@@ -8,6 +8,7 @@ import './index.scss';
 
 const EdittingBook: React.FC = () => {
   const [content, setContent] = useState<string>(localStorage.getItem("edittingBookData") || "**Hello world!!!**");
+
   useEffect(() => {
     actions.saveBookData(content);
   }, [content])

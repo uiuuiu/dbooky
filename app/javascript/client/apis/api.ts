@@ -45,6 +45,17 @@ const Api = () => {
           })
         )
       },
+
+      authGet: (endPoint: string, query: any) => {
+        return(
+          axios({
+            url: endPoint,
+            method: 'get',
+            data: query,
+            ...config
+          })
+        )
+      },
     }
   )
 }

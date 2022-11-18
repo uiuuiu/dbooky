@@ -12,6 +12,9 @@ Rails.application.routes.draw do
   get "edit_book", to: 'components#index'
 
   namespace :api do
-    resources :books
+    resources :books do
+      resources :chapters
+      resources :pages
+    end
   end
 end
