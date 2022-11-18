@@ -15,6 +15,10 @@ const bookActions: bookActionType = {
     store.dispatch({type: actions.BOOK_SAVE_DATA, data: data})
   },
   autoSaveBook: (data: any) => {
+    if (localStorage.getItem('loggedIn') !== "true") {
+      return
+    }
+
     return apis.book.postBook(data)
       .then((res: ApiResponseType) => {
         store.dispatch({ type: actions.BOOK_AUTO_SAVE_DATA, data: res.data })

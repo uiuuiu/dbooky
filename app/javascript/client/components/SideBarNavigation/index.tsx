@@ -7,7 +7,6 @@ import Chapters from "./Chapters";
 import Account from "./Account";
 import Books from './Books';
 
-import {bookActions} from "./actions";
 import appActions from "../../actions/appActions";
 
 import './index.scss';
@@ -15,7 +14,8 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../store";
 
 const SideBarNavigation: React.FC = () => {  
-  const { selectedTab } = useSelector((state: RootState) => state.app)
+  const { selectedTab, selectedBookType } = useSelector((state: RootState) => state.app)
+  console.log('selectedBookType',selectedBookType)
 
   return (
     <>
@@ -23,7 +23,7 @@ const SideBarNavigation: React.FC = () => {
         <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
           <TabList onChange={(_e, value) => appActions.changeSidebarTab(value)} aria-label="lab API tabs example">
             <Tab label="Editting" value="1" />
-            <Tab label="Chapters" value="2" />
+            <Tab label={selectedBookType == "simple" ? "Pages" : "Chapters"} value="2" />
             <Tab label="Books" value="3" />
             <Tab label="Account" value="4" />
           </TabList>

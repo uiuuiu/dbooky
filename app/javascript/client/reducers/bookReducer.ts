@@ -3,7 +3,9 @@ import actions from '../actions';
 
 const initialState = {
   edittingBookData: localStorage.getItem('edittingBookData'),
-  books: []
+  books: [],
+  chapters: [],
+  pages: []
 }
 
 // Use the initialState as a default value
@@ -26,6 +28,16 @@ export default function authReducer(state = initialState, action: AnyAction) {
       return {
         ...state,
         books: action.data.data
+      }
+    case actions.BOOK_CHAPTER_LIST:
+      return {
+        ...state,
+        chapters: action.data.data
+      }
+    case actions.BOOK_PAGE_LIST:
+      return {
+        ...state,
+        pages: action.data.data
       }
     default:
       // If this reducer doesn't recognize the action type, or doesn't

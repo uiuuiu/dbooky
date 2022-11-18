@@ -3,9 +3,7 @@ import apis from "../../apis";
 import actions from "../../actions";
 
 type authActionType = {
-  login: Function,
-  logout: Function,
-  register: Function
+  [key: string]: Function
 }
 
 export const authActions: authActionType = {
@@ -29,11 +27,20 @@ export const authActions: authActionType = {
 }
 
 type bookActionType = {
-  list: Function
+  [key: string]: Function
 }
 
 export const bookActions: bookActionType = {
   list: async () => {
-    store.dispatch(await apis.book.getBooks())
-  }
+    const result = await apis.book.getBooks()
+    store.dispatch({type: actions.BOOK_LIST, data: result.data})
+  },
+  fetchChapters: async (bookId: string) => {
+    const result = await apis.book.getBookChapters(bookId);
+    store.dispatch({type: actions.BOOK_CHAPTER_LIST, data: result.data})
+  },
+  fetchPages: async (bookId: string) => {
+    const result = await apis.book.getBookPages(bookId);
+    store.dispatch({type: actions.BOOK_PAGE_LIST, data: result.data})
+  }, 
 }

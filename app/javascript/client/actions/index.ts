@@ -9,6 +9,9 @@ const actions = {
   BOOK_SAVE_DATA: 'book/saveData',
   BOOK_AUTO_SAVE_DATA: 'book/autoSaveData',
   BOOK_LIST: 'book/list',
+  BOOK_SELECT: 'book/select',
+  BOOK_CHAPTER_LIST: 'book/chapter_list',
+  BOOK_PAGE_LIST: 'book/page_list'
 }
 
 export default actions;

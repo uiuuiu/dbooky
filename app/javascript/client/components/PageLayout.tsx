@@ -13,18 +13,24 @@ type PageLayoutProps = {
 
 type CustomGridProps = {
   children?: React.ReactNode
-  sm?: number
+  sm?: number,
+  style?: {},
   className?: string
 }
 
 const CustomGrid: React.FC<CustomGridProps> = ({children, ...props}) => { 
-  return <Grid item style={{border: "1px solid black", height: "100%"}} {...props}>{children}</Grid>
+  const style = {
+    ...props.style,
+    border: "1px solid black",
+    height: "100%"
+  }
+  return <Grid item {...props} style={style}>{children}</Grid>
 };
 
 const PageLayout: React.FC<PageLayoutProps> = ({ children }: PageLayoutProps) => {
   return (
     <Grid container spacing={2} style={{height: "100vh"}}>
-      <CustomGrid sm={3} className="left-board">
+      <CustomGrid sm={3} className="left-board" style={{overflow: 'scroll'}}>
         <SideBarNavigation />
       </CustomGrid>
       <CustomGrid sm={9}>

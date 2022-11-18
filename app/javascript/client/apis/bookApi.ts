@@ -8,7 +8,13 @@ const bookApi = (api: ApiType) => {
       },
       getBooks: () => {
         return api.get('/api/books');
-      }
+      },
+      getBookChapters: (bookId) => {
+        return api.get(`/api/books/${bookId}/chapters`)
+      },
+      getBookPages: (bookId) => {
+        return api.get(`/api/books/${bookId}/pages`)
+      },
     }
   )
 }
